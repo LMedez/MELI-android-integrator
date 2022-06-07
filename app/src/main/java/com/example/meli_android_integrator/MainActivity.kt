@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.example.meli_android_integrator.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.participantCountET.doOnTextChanged { text, start, before, count ->
-            if (text.isNullOrBlank()){
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+            if (text.isNullOrBlank() || text.startsWith("0")){
                 binding.startBT.isEnabled = false                                                   //Como es al principio?
                 Snackbar.make(view, "Invalid participant quantity.",
                     Snackbar.LENGTH_SHORT).show()
@@ -51,6 +53,6 @@ class MainActivity : AppCompatActivity() {
     //Called when the title "Terms and condition" is clicked.
     fun termsOnClickListener(view: View) {
         //Llamar a TermsActivity sin parametros
-        startActivity(Intent(this, TermsActivity::class.java).apply {})
+        startActivity(Intent(this, TermsActivity::class.java))
     }
 }
