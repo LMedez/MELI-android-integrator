@@ -6,27 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".SuggestionActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/black"></androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/activityNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
         android:text="TextView"
         android:textColor="#040303"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
 
     <TextView
         android:id="@+id/participantsTV"
@@ -52,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/participantsTV" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/anotherBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
@@ -63,25 +55,50 @@
         app:layout_constraintTop_toBottomOf="@+id/priceTV"
         app:layout_constraintVertical_bias="0.799" />
 
-    <EditText
-        android:id="@+id/participantsET"
+    <TextView
+        android:id="@+id/participantsResultTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="116dp"
+        android:text="texto"
         android:textColor="#020202"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/participantsTV"
         app:layout_constraintTop_toTopOf="@+id/participantsTV" />
 
-    <EditText
-        android:id="@+id/priceET"
+    <TextView
+        android:id="@+id/priceResultTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="116dp"
+        android:text="texto"
         android:textColor="#0B0A0A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/priceTV"
         app:layout_constraintTop_toTopOf="@+id/priceTV" />
+
+    <ImageButton
+        android:id="@+id/backIB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <TextView
+        android:id="@+id/activityTypeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textColor="#050505"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toEndOf="@+id/backIB"
+        app:layout_constraintTop_toTopOf="@+id/backIB" />
 </androidx.constraintlayout.widget.ConstraintLayout>
