@@ -42,7 +42,7 @@ class ActivitiesActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val countParticipants = intent.getIntExtra("count_participants",1)
+        val countParticipants = intent.getIntExtra("count_participants", 1)
 
         // Set the adapter of list view and perform the lambda for the onClick method
         binding.activitiesLV.adapter = Adapter(this, activities) { activity ->
@@ -56,7 +56,10 @@ class ActivitiesActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToSuggestionActivity(activity: String = activities.random(), countParticipants: Int) {
+    private fun navigateToSuggestionActivity(
+        activity: String = activities.random().lowercase(),
+        countParticipants: Int
+    ) {
         val intentActivitiesActivity = Intent(this, SuggestionActivity::class.java).apply {
             putExtra("count_participants", countParticipants)
             putExtra("activity", activity)
@@ -79,7 +82,7 @@ class ActivitiesActivity : AppCompatActivity() {
             val binding =
                 CustomListviewBinding.inflate(LayoutInflater.from(context), null, false)
             binding.activityTV.text = activities[position]
-            binding.suggestionIB.setOnClickListener { onItemClick(activities[position].lowercase(Locale.ROOT)) }
+            binding.suggestionIB.setOnClickListener { onItemClick(activities[position].lowercase()) }
             return binding.root
         }
     }
