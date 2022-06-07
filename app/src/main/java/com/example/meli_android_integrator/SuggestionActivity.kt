@@ -16,14 +16,23 @@ class SuggestionActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val countParticipants = intent.getIntExtra("count_participants", 0)        //Usamos 0 pa no poner null?
+        val activityType = intent.getStringExtra("activity")                                  //Puede no haber nada?
+
+        Snackbar.make(view, "Participantes = $countParticipants / tipo activity = $activityType",
+            Snackbar.LENGTH_SHORT).show()
+
         //Llamar a API con los parametros recibidos.
-        queryApi(null, null)
+        queryApi(activityType ,countParticipants )
 
         updateView(0.1F,2,"bascket","deporte")
 
         binding.anotherBT.setOnClickListener {
             //Llamar devuelta a la API.. tener en cuenta si era random y eso. Usamos sharedpref para guardar estos datos?
             queryApi(null, null)
+        }
+        binding.backIB.setOnClickListener{
+                finish()
         }
     }
     fun queryApi(activityType: String?, countParticipant: Int?){
@@ -58,4 +67,5 @@ class SuggestionActivity : AppCompatActivity() {
             binding.activityTypeTV.text = activityType
         }
     }
+
 }
