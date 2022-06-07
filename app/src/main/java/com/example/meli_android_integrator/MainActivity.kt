@@ -23,20 +23,15 @@ class MainActivity : AppCompatActivity() {
             //Validar participantes ingresados
             if (binding.participantCountET.text.toString().equals("")) {                            //Tuve q poner toString porq no me tomaba el equals
                 //Llamar a ActivitiesActivity sin cant participantes.
-/*
-                   val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java).apply
+                   val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java)
                     startActivity(intentActivitiesActivity)
-*/
-
             } else {
                 val countParticipants = binding.participantCountET.text.toString().toInt()          //Es necesrio?, se podria manejar solo con string?
                 //Llamar a ActivitiesActivity con cantidad de participantes.
-/*
                    val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java).apply {
                         putExtra("count_participants", countParticipants)
                     }
                     startActivity(intentActivitiesActivity)
-*/
             }
 
         }

@@ -20,6 +20,9 @@
             android:name=".TermsActivity"
             android:exported="false" />
         <activity
+            android:name=".SuggestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
