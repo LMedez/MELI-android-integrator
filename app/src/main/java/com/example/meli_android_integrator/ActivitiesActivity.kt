@@ -57,12 +57,15 @@ class ActivitiesActivity : AppCompatActivity() {
     }
 
     private fun navigateToSuggestionActivity(
-        activity: String = "random",
+        activity: String? = null,
         countParticipants: Int
     ) {
         val intentActivitiesActivity = Intent(this, SuggestionActivity::class.java).apply {
+            // if activity is not null then send a put extra with the activity
+            activity?.let {
+                putExtra("activity", activity)
+            }
             putExtra("count_participants", countParticipants)
-            putExtra("activity", activity)
         }
         startActivity(intentActivitiesActivity)
     }
