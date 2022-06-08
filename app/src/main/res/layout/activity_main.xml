@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="termsOnClickListener"
-        android:text="Terms and conditions"
+        android:text= "@string/main_terms_and_conditions"
         android:textColor="#050505"
         android:textIsSelectable="false"
         android:textStyle="bold"
