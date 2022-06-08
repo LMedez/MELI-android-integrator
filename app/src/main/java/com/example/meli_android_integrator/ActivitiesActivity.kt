@@ -57,7 +57,7 @@ class ActivitiesActivity : AppCompatActivity() {
     }
 
     private fun navigateToSuggestionActivity(
-        activity: String = activities.random().lowercase(),
+        activity: String = "random",
         countParticipants: Int
     ) {
         val intentActivitiesActivity = Intent(this, SuggestionActivity::class.java).apply {
