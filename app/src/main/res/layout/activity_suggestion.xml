@@ -6,7 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".SuggestionActivity">
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/backIB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_gravity= "center|start"
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:id="@+id/activityTypeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:textColor="?attr/colorSecondary"
+            android:textStyle="bold" />
+    </FrameLayout>
     <TextView
         android:id="@+id/activityNameTV"
         android:layout_width="wrap_content"
@@ -24,8 +51,10 @@
         android:id="@+id/participantsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="172dp"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="16dp"
         android:isScrollContainer="true"
         android:text="Participants"
         android:textColor="#020202"
@@ -36,8 +65,10 @@
         android:id="@+id/priceTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
+        android:drawableLeft="@drawable/ic_baseline_attach_money_24"
+        android:drawablePadding="16dp"
         android:text="Price"
         android:textColor="#050505"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +78,7 @@
         android:id="@+id/anotherBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Try another"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
@@ -59,7 +90,7 @@
         android:id="@+id/participantsResultTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="100dp"
         android:text="texto"
         android:textColor="#020202"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +102,7 @@
         android:id="@+id/priceResultTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="100dp"
         android:text="texto"
         android:textColor="#0B0A0A"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,26 +110,5 @@
         app:layout_constraintStart_toEndOf="@+id/priceTV"
         app:layout_constraintTop_toTopOf="@+id/priceTV" />
 
-    <ImageButton
-        android:id="@+id/backIB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
 
-    <TextView
-        android:id="@+id/activityTypeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
-        app:layout_constraintStart_toEndOf="@+id/backIB"
-        app:layout_constraintTop_toTopOf="@+id/backIB" />
 </androidx.constraintlayout.widget.ConstraintLayout>
