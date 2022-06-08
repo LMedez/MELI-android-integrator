@@ -3,9 +3,14 @@ package com.example.meli_android_integrator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import com.example.meli_android_integrator.apiservice.ActicityServiceImpl
 import com.example.meli_android_integrator.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +55,26 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+
+        /*binding.testAPI.setOnClickListener {
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val responseAPIRandom = ActicityServiceImpl()
+                val activityRandom = responseAPIRandom.getActivityRandom()
+                Log.e("ActivityMainRandom", activityRandom.toString())
+
+                val activityByType = ActicityServiceImpl().getActivityByType("cooking")
+                Log.e("ActivityMain", activityByType.toString())
+
+                val activityByNumber = ActicityServiceImpl().getActivityByNumber(2)
+                Log.e("ActivityByNumber", activityByNumber.toString())
+
+                val activityByNumberAndType = ActicityServiceImpl().getActivityByNumberAndType("cooking", 1)
+                Log.e("NumerAndType", activityByNumberAndType.toString())
+
+            }
+
+        }*/
     }
 
     //Called when the title "Terms and condition" is clicked.
