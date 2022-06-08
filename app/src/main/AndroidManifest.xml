@@ -17,7 +17,13 @@
         android:theme="@style/Theme.MELIandroidintegrator"
         tools:targetApi="31">
         <activity
+            android:name=".ActivitiesActivity"
+            android:exported="false" />
+        <activity
             android:name=".TermsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuggestionActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
