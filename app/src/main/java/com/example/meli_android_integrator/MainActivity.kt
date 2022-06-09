@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         binding.startBT.setOnClickListener {
             //Validar participantes ingresados
-            if (binding.participantCountET.text.toString().equals("")) {                            //Tuve q poner toString porq no me tomaba el equals
+            if (binding.participantCountET.text.toString() == "") {
                 //Llamar a ActivitiesActivity sin cant participantes.
                    val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java)
                     startActivity(intentActivitiesActivity)
             } else {
-                val countParticipants = binding.participantCountET.text.toString().toInt()          //Es necesrio?, se podria manejar solo con string?
+                val countParticipants = binding.participantCountET.text.toString().toInt()
                 //Llamar a ActivitiesActivity con cantidad de participantes.
                    val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java).apply {
                         putExtra("count_participants", countParticipants)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         binding.participantCountET.doOnTextChanged { text, start, before, count ->
             Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
             if (text.isNullOrBlank() || text.startsWith("0")){
-                binding.startBT.isEnabled = false                                                   //Como es al principio?
+                binding.startBT.isEnabled = false
                 Snackbar.make(view, "Invalid participant quantity.",
                     Snackbar.LENGTH_SHORT).show()
             }else{
