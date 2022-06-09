@@ -24,59 +24,60 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        /**
+         * On click Button Start check if exists participants in the edit text
+         * and start the activity with extras of participant
+         * otherwise, start the activity without extras
+         *
+         * */
         binding.startBT.setOnClickListener {
-            //Validar participantes ingresados
-            if (binding.participantCountET.text.toString().equals("")) {                            //Tuve q poner toString porq no me tomaba el equals
-                //Llamar a ActivitiesActivity sin cant participantes.
-                   val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java)
-                    startActivity(intentActivitiesActivity)
+            if (binding.participantCountET.text.toString() == "") {
+                navigateToActivitiesActivity()
             } else {
-                val countParticipants = binding.participantCountET.text.toString().toInt()          //Es necesrio?, se podria manejar solo con string?
-                //Llamar a ActivitiesActivity con cantidad de participantes.
-                   val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java).apply {
-                        putExtra("count_participants", countParticipants)
-                    }
-                    startActivity(intentActivitiesActivity)
+                val countParticipants = binding.participantCountET.text.toString().toInt()
+                navigateToActivitiesActivity(countParticipants)
             }
-
         }
 
-        binding.participantCountET.doOnTextChanged { text, start, before, count ->
-            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-            if (text.isNullOrBlank() || text.startsWith("0")){
-                binding.startBT.isEnabled = false                                                   //Como es al principio?
-                Snackbar.make(view, "Invalid participant quantity.",
-                    Snackbar.LENGTH_SHORT).show()
-            }else{
+        /**
+         * Check if the number of participants is 0 or starts with 0
+         * and disables the start button, otherwise enables the button
+         *
+         * */
+        binding.participantCountET.doOnTextChanged { text, _, _, _ ->
+            if (text?.startsWith("0") == true) {
+                binding.startBT.isEnabled = false
+                Snackbar.make(
+                    view, "Invalid participant quantity.",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
                 binding.startBT.isEnabled = true
-
             }
         }
-
-        /*binding.testAPI.setOnClickListener {
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val responseAPIRandom = ActicityServiceImpl()
-                val activityRandom = responseAPIRandom.getActivityRandom()
-                Log.e("ActivityMainRandom", activityRandom.toString())
-
-                val activityByType = ActicityServiceImpl().getActivityByType("cooking")
-                Log.e("ActivityMain", activityByType.toString())
-
-                val activityByNumber = ActicityServiceImpl().getActivityByNumber(2)
-                Log.e("ActivityByNumber", activityByNumber.toString())
-
-                val activityByNumberAndType = ActicityServiceImpl().getActivityByNumberAndType("cooking", 1)
-                Log.e("NumerAndType", activityByNumberAndType.toString())
-
-            }
-
-        }*/
     }
 
-    //Called when the title "Terms and condition" is clicked.
+    /**
+     * Called when the title "Terms and condition" is clicked.
+     *
+     * */
     fun termsOnClickListener(view: View) {
-        //Llamar a TermsActivity sin parametros
         startActivity(Intent(this, TermsActivity::class.java))
+    }
+
+    /**
+     * Navigate to second activity and add the participants in the intent extras
+     * or without extras if participants is empty
+     *
+     * */
+    private fun navigateToActivitiesActivity(participant: Int? = null) {
+        val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java)
+        participant?.let {
+            intentActivitiesActivity.apply {
+                putExtra("count_participants", it)
+            }
+        }
+        startActivity(intentActivitiesActivity)
     }
 }
