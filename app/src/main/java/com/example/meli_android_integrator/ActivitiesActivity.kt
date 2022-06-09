@@ -20,7 +20,7 @@ import java.util.*
 class ActivitiesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityActivitiesBinding
 
-    /*
+    /**
     * List of activities
     *
     * */
@@ -44,7 +44,10 @@ class ActivitiesActivity : AppCompatActivity() {
 
         val countParticipants = intent.getIntExtra("count_participants", 1)
 
-        // Set the adapter of list view and perform the lambda for the onClick method
+        /**
+         *  Set the adapter of list view and perform the lambda for the onClick method
+         *
+         * */
         binding.activitiesLV.adapter = Adapter(this, activities) { activity ->
             // Navigate to activity with the selected activity and the count of participant
             navigateToSuggestionActivity(activity, countParticipants)
@@ -55,6 +58,12 @@ class ActivitiesActivity : AppCompatActivity() {
             navigateToSuggestionActivity(countParticipants = countParticipants)
         }
     }
+
+    /**
+     * Navigate to SuggestionActivity and add the participants and activity in the intent extras
+     * or without extras of activity if activity is empty
+     *
+     * */
 
     private fun navigateToSuggestionActivity(
         activity: String? = null,
@@ -70,7 +79,7 @@ class ActivitiesActivity : AppCompatActivity() {
         startActivity(intentActivitiesActivity)
     }
 
-    /*
+    /**
     * Adapter for list view. Extends of a base ArrayAdapter and override the getView method to return
     * a custom view
     *
