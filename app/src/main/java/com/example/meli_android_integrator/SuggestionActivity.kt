@@ -14,6 +14,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.zip.ZipEntry
 
+/**
+ * Request to the API for an activity suggestion, taking care about the parameters
+ * received. Then show the results at the View. The user can go back to choose for
+ * another type of activity (or random ), or Try Again to receive another with the
+ * current parameters.
+ */
 class SuggestionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySuggestionBinding
@@ -24,65 +30,32 @@ class SuggestionActivity : AppCompatActivity() {
         binding = ActivitySuggestionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-//        val countParticipants = intent.getIntExtra("count_participants", 0)        //Usamos 0 pa no poner null?
-//        val activityType = intent.getStringExtra("activity")                                  //Puede no haber nada?
-
-/*        if(intent.hasExtra("count_participants")){
-            val countParticipants = intent.getIntExtra("count_participants", 0)
-        }
-        if(intent.hasExtra("activity")){
-            val activityType = intent.getStringExtra("activity")
-        }
-*/
-        /*binding.testAPI.setOnClickListener {
-
-    CoroutineScope(Dispatchers.IO).launch {
-        val responseAPIRandom = ActicityServiceImpl()
-        val activityRandom = responseAPIRandom.getActivityRandom()
-        Log.e("ActivityMainRandom", activityRandom.toString())
-
-        val activityByType = ActicityServiceImpl().getActivityByType("cooking")
-        Log.e("ActivityMain", activityByType.toString())
-
-        val activityByNumber = ActicityServiceImpl().getActivityByNumber(2)
-        Log.e("ActivityByNumber", activityByNumber.toString())
-
-        val activityByNumberAndType = ActicityServiceImpl().getActivityByNumberAndType("cooking", 1)
-        Log.e("NumerAndType", activityByNumberAndType.toString())
-
-    }
-
-}*/
+        //Make the request for the API, and then update the View.
         callApi()
-//        Snackbar.make(view, "Participantes = $countParticipants / tipo activity = $activityType", Snackbar.LENGTH_SHORT).show()
 
-        //Llamar a API con los parametros recibidos.
-            //Si tenemos activityType y countParticipants
-                //queryApi(activityType ,countParticipants )
-            //Si tenemos activityType
-                //queryApi(activityType)
-            //Si tenemos countParticipants
-                //queryApi(countParticipants)
-/*
-        updateView(responseFromApi.price, responseFromApi.participants, responseFromApi.activity,
-            responseFromApi.type)
-*/
         binding.anotherBT.setOnClickListener {
-            //Llamar devuelta a la API.. tener en cuenta si era random y eso. Usamos sharedpref para guardar estos datos?
-            //Vamos a necesitar algo q guarde si era random o no
-//            callApi()
-            finish()
+            /**
+             * Make the request to the API with the same parameters. The API returns
+             * another activity. Then update the View again.
+             */
+            callApi()
         }
         binding.backIB.setOnClickListener{
+            /**
+             * Go abck to the previous activity (ActivitiesActivity )
+             */
             finish()
         }
     }
 
-    //Update the fields of the view with the received parameters.
+    /**
+     * Update the fields of the view with the received parameters.
+     * priceRange (0, 1 )
+     * countParticipant is the quantity
+     */
     fun updateView(priceRange: Double, countParticipant: Int, activityName: String, activityType: String){
 
-        //Actualizar dato con precio q viene de la API
+        //Update the price tv
         var priceValue = ""
         when{
             priceRange > 0.6      -> priceValue = "High"
@@ -92,13 +65,13 @@ class SuggestionActivity : AppCompatActivity() {
         }
         binding.priceResultTV.text = "$priceValue"
 
-        //Actualizar dato con cant participantes q viene de la API
+        //Update the participant quantity TV
         binding.participantsResultTV.text = countParticipant.toString()
 
-        //Actualizar dato titulo activity con lo q q viene de la API
+        //Update the activity name TV
         binding.activityNameTV.text = activityName
 
-        //Si viene tipo actividad como parametro-> Actualizar titulo toolbar con este, o el de la API.
+        //Update the activity title TV
         if(!intent.hasExtra("activity")){
             binding.activityTypeTV.text = "Random"
             binding.randomActivityTV.isVisible = true
@@ -109,10 +82,18 @@ class SuggestionActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Consume the API with the parameters received:
+     * NOTE That would be 4 types of query:
+     *  With type of activity and participant quantity especified.
+     *  Only with type off activity especified
+     *  Only with participant quantity especified.
+     *  Without any value especified.
+     */
     fun callApi(){
         CoroutineScope(Dispatchers.IO).launch {
             lateinit var responseFromApi: ActivityModel
-            when {                                                                                  //Esta bien lo del let
+            when {
                 intent.hasExtra("count_participants") &&
                         intent.hasExtra("activity") -> intent.getStringExtra("activity")?.let {
                     responseFromApi = retrofit.getActivityByNumberAndType(it, intent.getIntExtra("count_participants", 0)
@@ -128,16 +109,15 @@ class SuggestionActivity : AppCompatActivity() {
                         intent.hasExtra("count_participants") -> responseFromApi = retrofit.getActivityByNumber(
                     intent.getIntExtra("count_participants", 0)
                 )
-
-//            !intent.hasExtra("activity") && !intent.hasExtra("count_participants")-> queryApi()
                 else -> responseFromApi = retrofit.getActivityRandom()
             }
+            //At Main Activity scope, the View is updated with the data from the API
             runOnUiThread {
                 if(!responseFromApi.activity.isNullOrBlank()) {
                     updateView(responseFromApi.price, responseFromApi.participants, responseFromApi.activity,
                     responseFromApi.type)
                 }else {
-                    Snackbar.make(binding.root, "There isn´t a suggestion... Try another.",
+                    Snackbar.make(binding.root, "There isn´t a suggestion... look for another type of activity",
                         Snackbar.LENGTH_SHORT).show()
                     updateView(0.0, 0, "No activity found with the specified parameters", "Error")
                     binding.priceResultTV.visibility = View.GONE
