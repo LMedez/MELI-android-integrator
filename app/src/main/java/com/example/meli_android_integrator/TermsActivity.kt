@@ -13,12 +13,13 @@ class TermsActivity : AppCompatActivity() {
         binding = ActivityTermsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        binding.closeIB.setOnClickListener {
-            navigateToMainActivity()
-        }
-    }
 
-    fun navigateToMainActivity() {
-        finish()
+        /**
+         * Close the ThermsActivity and go to MainActivity
+         *
+         * */
+        binding.closeIB.setOnClickListener {
+            finish()
+        }
     }
 }
