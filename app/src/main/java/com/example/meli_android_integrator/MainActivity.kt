@@ -32,30 +32,14 @@ class MainActivity : AppCompatActivity() {
          *
          * */
         binding.startBT.setOnClickListener {
-<<<<<<< HEAD
             if (binding.participantCountET.text.toString() == "") {
                 navigateToActivitiesActivity()
             } else {
                 val countParticipants = binding.participantCountET.text.toString().toInt()
                 navigateToActivitiesActivity(countParticipants)
-=======
-            //Validar participantes ingresados
-            if (binding.participantCountET.text.toString() == "") {
-                //Llamar a ActivitiesActivity sin cant participantes.
-                   val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java)
-                    startActivity(intentActivitiesActivity)
-            } else {
-                val countParticipants = binding.participantCountET.text.toString().toInt()
-                //Llamar a ActivitiesActivity con cantidad de participantes.
-                   val intentActivitiesActivity = Intent(this, ActivitiesActivity::class.java).apply {
-                        putExtra("count_participants", countParticipants)
-                    }
-                    startActivity(intentActivitiesActivity)
->>>>>>> 33f6e134d8fd83143f60a2b06dab7f6af1fdc951
             }
         }
 
-<<<<<<< HEAD
         /**
          * Check if the number of participants is 0 or starts with 0
          * and disables the start button, otherwise enables the button
@@ -69,15 +53,6 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             } else {
-=======
-        binding.participantCountET.doOnTextChanged { text, start, before, count ->
-            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-            if (text.isNullOrBlank() || text.startsWith("0")){
-                binding.startBT.isEnabled = false
-                Snackbar.make(view, "Invalid participant quantity.",
-                    Snackbar.LENGTH_SHORT).show()
-            }else{
->>>>>>> 33f6e134d8fd83143f60a2b06dab7f6af1fdc951
                 binding.startBT.isEnabled = true
             }
         }
