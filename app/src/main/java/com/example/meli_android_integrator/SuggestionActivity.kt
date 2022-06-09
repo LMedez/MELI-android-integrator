@@ -15,7 +15,10 @@ import kotlinx.coroutines.launch
 import java.util.zip.ZipEntry
 
 /**
- * All the logic for the activity_suggestion.xml.
+ * Request to the API for an activity suggestion, taking care about the parameters
+ * received. Then show the results at the View. The user can go back to choose for
+ * another type of activity (or random ), or Try Again to receive another with the
+ * current parameters.
  */
 class SuggestionActivity : AppCompatActivity() {
 
@@ -31,11 +34,11 @@ class SuggestionActivity : AppCompatActivity() {
         callApi()
 
         binding.anotherBT.setOnClickListener {
-            /**Here we decided that, every time the user want to "Try Another" (maybe because there
-             * isn´t a suggestion for this quantity of participants ), would be desirable to choose
-             * another type of activity that feet to this requirement.
+            /**
+             * Make the request to the API with the same parameters. The API returns
+             * another activity. Then update the View again.
              */
-            finish()
+            callApi()
         }
         binding.backIB.setOnClickListener{
             /**
@@ -47,6 +50,8 @@ class SuggestionActivity : AppCompatActivity() {
 
     /**
      * Update the fields of the view with the received parameters.
+     * priceRange (0, 1 )
+     * countParticipant is the quantity
      */
     fun updateView(priceRange: Double, countParticipant: Int, activityName: String, activityType: String){
 
