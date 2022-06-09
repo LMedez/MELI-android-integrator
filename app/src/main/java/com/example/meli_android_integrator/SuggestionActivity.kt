@@ -2,6 +2,7 @@ package com.example.meli_android_integrator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import com.example.meli_android_integrator.apiservice.ActicityServiceImpl
 import com.example.meli_android_integrator.databinding.ActivitySuggestionBinding
@@ -138,6 +139,9 @@ class SuggestionActivity : AppCompatActivity() {
                 }else {
                     Snackbar.make(binding.root, "There isn´t a suggestion... Try another.",
                         Snackbar.LENGTH_SHORT).show()
+                    updateView(0.0, 0, "No activity found with the specified parameters", "Error")
+                    binding.priceResultTV.visibility = View.GONE
+                    binding.participantsResultTV.visibility = View.GONE
                 }
             }
         }
